@@ -1,13 +1,15 @@
-from django.contrib.auth.models import User, Group
+from synergy.models import Synergy, Turn
 from rest_framework import serializers
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class SynergySerializer(serializers.ModelSerializer):
+    turns = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = Synergy
+        fields = ('author', 'turns')
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class TurnSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = Turn
+        fields = ('rank', 'cards')
