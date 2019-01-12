@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import AllowAny
+from .models import Card
+from .serializers import CardSerializer
 
-# Create your views here.
+class CardViewSet(mixins.ListModelMixin,
+                  mixins.RetrieveModelMixin,
+                  viewsets.GenericViewSet):
+    """
+    API endpoint that allows cards to be viewed or edited.
+    """
+    queryset = Card.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = CardSerializer
