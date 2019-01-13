@@ -23,6 +23,9 @@ class Turn(models.Model):
   def get_owner(self):
     return self.synergy.author
 
+  class Meta:
+    ordering = ('-rank',)
+
 class Event(models.Model):
   card = models.ForeignKey('card.Card', related_name='events', on_delete=models.CASCADE)
   turn = models.ForeignKey('Turn', related_name='events', on_delete=models.CASCADE)
@@ -34,3 +37,6 @@ class Event(models.Model):
 
   def get_owner(self):
     return self.turn.synergy.author
+
+  class Meta:
+    ordering = ('-rank',)
