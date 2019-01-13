@@ -31,7 +31,7 @@ class Event(models.Model):
   turn = models.ForeignKey('Turn', related_name='events', on_delete=models.CASCADE)
   category = models.CharField(
     max_length=6,
-    choices=[(tag, tag.value) for tag in EventCategory]
+    choices=[(tag.value, tag.name) for tag in EventCategory]
   )
   rank = models.IntegerField()
 
