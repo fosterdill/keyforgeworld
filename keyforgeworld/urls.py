@@ -18,10 +18,14 @@ from django.urls import path
 from django.conf.urls import url, include
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
-from card import views
+from card import views as card_views
+from synergy import views as synergy_views
 
 router = routers.DefaultRouter()
-router.register(r'cards', views.CardViewSet)
+router.register(r'cards', card_views.CardViewSet, 'hi')
+router.register(r'synergies', synergy_views.SynergyViewSet, 'hi')
+router.register(r'turns', synergy_views.TurnViewSet, 'hi')
+router.register(r'events', synergy_views.EventViewSet, 'hi')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

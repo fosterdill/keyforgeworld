@@ -2,7 +2,7 @@ from django.db import models
 from card.models import Card
 from enum import Enum
 
-class EventCategory(Enum):
+class EventCategory(str, Enum):
   REAP = 'Reap'
   ATTACK = 'Attack'
   ACTION = 'Action'
@@ -11,10 +11,17 @@ class EventCategory(Enum):
 class Synergy(models.Model):
   author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 
+  def get_owner(self):
+    return self.author
+
+
 class Turn(models.Model):
   synergy = models.ForeignKey('Synergy', related_name='turns', on_delete=models.CASCADE)
   cards = models.ManyToManyField(Card, through='Event')
   rank = models.IntegerField()
+
+  def get_owner(self):
+    return self.synergy.author
 
 class Event(models.Model):
   card = models.ForeignKey('card.Card', related_name='events', on_delete=models.CASCADE)
@@ -24,3 +31,6 @@ class Event(models.Model):
     choices=[(tag, tag.value) for tag in EventCategory]
   )
   rank = models.IntegerField()
+
+  def get_owner(self):
+    return self.turn.synergy.author

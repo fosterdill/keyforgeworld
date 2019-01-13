@@ -384,7 +384,7 @@ class Command(BaseCommand):
 
           for card in cards:
             Card(**{
-              'id': card['id'],
+              'id': card['number'] + '-' + card['name'].lower().replace(' ', '-').replace(',', '').replace('!', ''),
               'number': card['number'],
               'name': card['name'],
               'house': card['house'],
