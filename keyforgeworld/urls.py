@@ -42,7 +42,14 @@ def users_view(request):
 
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
-        return HttpResponse('{ "token": "' + token + '" }', status=200)
+        payload = {
+            'token': token,
+            'username': user.username,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+        }
+        return HttpResponse(json.dumps(payload))
     else:
         return HttpResponseNotFound()
 

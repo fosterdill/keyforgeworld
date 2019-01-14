@@ -1,4 +1,5 @@
 from synergy.models import Synergy, Turn, Event
+from card.serializers import CardSerializer
 from django.core.paginator import Paginator
 from rest_framework.response import Response
 from rest_framework import serializers, pagination
@@ -8,6 +9,8 @@ from rest_framework.renderers import JSONRenderer
 MAX_RELATED_RECORDS = 10
 
 class EventSerializer(serializers.ModelSerializer):
+    card = CardSerializer(read_only=True)
+
     class Meta:
         model = Event
         fields = '__all__'
@@ -25,6 +28,7 @@ class TurnSerializer(serializers.ModelSerializer):
 
 class SynergySerializer(serializers.ModelSerializer):
     turns = TurnSerializer(many=True, read_only=True)
+    author = serializers.StringRelatedField()
 
     class Meta:
         model = Synergy
