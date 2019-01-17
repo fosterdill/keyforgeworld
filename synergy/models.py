@@ -4,7 +4,7 @@ from enum import Enum
 
 class EventCategory(str, Enum):
   REAP = 'Reap'
-  ATTACK = 'Attack'
+  FIGHT = 'Fight'
   ACTION = 'Action'
   PLAY = 'Play'
 
@@ -24,7 +24,7 @@ class Turn(models.Model):
     return self.synergy.author
 
   class Meta:
-    ordering = ('-rank',)
+    ordering = ('rank',)
 
 class Event(models.Model):
   card = models.ForeignKey('card.Card', related_name='events', on_delete=models.CASCADE)
@@ -39,4 +39,4 @@ class Event(models.Model):
     return self.turn.synergy.author
 
   class Meta:
-    ordering = ('-rank',)
+    ordering = ('rank',)
