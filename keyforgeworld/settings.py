@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'synergy.apps.SynergyConfig',
+    'deck.apps.DeckConfig',
     'card.apps.CardConfig',
     'corsheaders',
     'django.contrib.admin',

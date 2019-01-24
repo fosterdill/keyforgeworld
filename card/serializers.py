@@ -5,3 +5,6 @@ class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = '__all__'
+    
+    def __str__(self):
+        self.card_title

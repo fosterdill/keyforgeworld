@@ -28,7 +28,6 @@ import json
 router = routers.DefaultRouter()
 router.register(r'cards', card_views.CardViewSet, 'hi')
 router.register(r'synergies', synergy_views.SynergyViewSet, 'hi')
-router.register(r'turns', synergy_views.TurnViewSet, 'hi')
 router.register(r'events', synergy_views.EventViewSet, 'hi')
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
